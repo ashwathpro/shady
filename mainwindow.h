@@ -97,6 +97,7 @@ private:
     void createMenus();
     void initScene();
     void initTools();
+    void createCustomDialog(QString title, QString input1,QString input2,QString input3);
 
     QSize getSize();
 

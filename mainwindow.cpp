@@ -44,6 +44,7 @@
 #include "meshshape.h"
 #include "Canvas.h"
 #include "Patch.h"
+#include "customdialog.h"
 
 #include <QtWidgets>
 
@@ -354,6 +355,8 @@ void MainWindow::selectDeleteFace()
 
 void MainWindow::selectInsertSegment()
 {
+    createCustomDialog("Insert Segment", "input1","input2","input3");
+
     MeshShape::setOPMODE(MeshShape::INSERT_SEGMENT);
     unselectDrag();
 }
@@ -392,6 +395,7 @@ void MainWindow::toggleShading(){
 
 void MainWindow::new2NGon()
 {
+    createCustomDialog("Create NGon", "input1","input2","input3");
     MeshShape* pM = MeshShape::newMeshShape(Point(0,0), MeshShape::NGON);
     Canvas::get()->insert(pM);
     glWidget->updateGL();
@@ -399,6 +403,7 @@ void MainWindow::new2NGon()
 
 void MainWindow::newGrid()
 {
+    createCustomDialog("Create New Grid", "input1","input2","input3");
     MeshShape* pM = MeshShape::newMeshShape(Point(0,0), MeshShape::SQUARE);
     Canvas::get()->insert(pM);
     glWidget->updateGL();
@@ -406,6 +411,7 @@ void MainWindow::newGrid()
 
 void MainWindow::newSpine()
 {
+    createCustomDialog("Create New Grid", "input1","input2","input3");
     //MeshShape* pM = MeshShape::newMeshShape(Point(0,0),MeshShape::SPINE);
     //Canvas::get()->insert(pM);
 }
@@ -461,4 +467,23 @@ void MainWindow::sendShapeFront(){
     glWidget->updateGL();
 }
 
+void MainWindow::createCustomDialog(QString title, QString input1,QString input2,QString input3)
+{
+    string  Value0 = "Value";            // NOTE: these lines of code (the variables you wish to change)
+    bool    Value1  = true;                //  probably exist in your program already and so it is only
+    int     Value2      = 20;                  //  the seven lines below needed to "create and display"
+    int     Value3 = 1;                   //  your custom dialog.
 
+    CustomDialog d(title, this);                            // We want our custom dialog called "Registration".
+    d.addLabel    ("Please enter the details below ...");           // The first element is just a text label (non interactive).
+    d.addLineEdit (input1+"  ", &Value0, "No middle name!");             // Here's a line edit.
+    d.addCheckBox (input2+"  ", &Value1, "my tooltip");       // Here's a checkbox with a tooltip (optional last argument).
+    d.addSpinBox  (input3+"  ", 1, 120, &Value2, 1);                   // Here's a number spin box for age.
+    d.addComboBox ("Value: ", "Value1|Value2|Value3", &Value3);   // And here's a combo box with three options (separated by '|').
+
+    d.exec();                             // Execution stops here until user closes dialog
+
+    if(d.wasCancelled())                // If the user hit cancel, your values stay the same
+        return;                           // and you probably don't need to do anything
+//     cout << "Thanks " << name << end;   // and here it's up to you to do stuff with your new values!
+}
