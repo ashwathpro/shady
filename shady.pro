@@ -13,7 +13,8 @@ HEADERS       = glwidget.h \
     spineshape.h \
     CMesh.h \
     curve.h \
-    Patch.h
+    Patch.h \
+    customdialog.h
 
 SOURCES       = glwidget.cpp \
                 main.cpp \
@@ -28,6 +29,7 @@ SOURCES       = glwidget.cpp \
     CMesh.cpp \
     curve.cpp \
     beziershape.cpp \
-    Patch.cpp
+    Patch.cpp \
+    customdialog.cpp
 
 QT           += opengl widgets

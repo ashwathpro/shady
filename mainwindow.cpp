@@ -411,7 +411,7 @@ void MainWindow::newGrid()
 
 void MainWindow::newSpine()
 {
-    createCustomDialog("Create New Grid", "input1","input2","input3");
+    createCustomDialog("Create New Spine", "input1","input2","input3");
     //MeshShape* pM = MeshShape::newMeshShape(Point(0,0),MeshShape::SPINE);
     //Canvas::get()->insert(pM);
 }
@@ -470,16 +470,16 @@ void MainWindow::sendShapeFront(){
 void MainWindow::createCustomDialog(QString title, QString input1,QString input2,QString input3)
 {
     string  Value0 = "Value";            // NOTE: these lines of code (the variables you wish to change)
-    bool    Value1  = true;                //  probably exist in your program already and so it is only
-    int     Value2      = 20;                  //  the seven lines below needed to "create and display"
-    int     Value3 = 1;                   //  your custom dialog.
+    bool    Value1  = true;              //  probably exist in your program already and so it is only
+    int     Value2      = 20;
+    int     Value3 = 1;
 
-    CustomDialog d(title, this);                            // We want our custom dialog called "Registration".
+    CustomDialog d(title, this);                            // Title for custom dialog
     d.addLabel    ("Please enter the details below ...");           // The first element is just a text label (non interactive).
-    d.addLineEdit (input1+"  ", &Value0, "No middle name!");             // Here's a line edit.
-    d.addCheckBox (input2+"  ", &Value1, "my tooltip");       // Here's a checkbox with a tooltip (optional last argument).
-    d.addSpinBox  (input3+"  ", 1, 120, &Value2, 1);                   // Here's a number spin box for age.
-    d.addComboBox ("Value: ", "Value1|Value2|Value3", &Value3);   // And here's a combo box with three options (separated by '|').
+    d.addLineEdit (input1+"  ", &Value0, "Tooltip value");             // line edit.
+    d.addCheckBox (input2+"  ", &Value1, "my tooltip");       // A checkbox with a tooltip (optional last argument).
+    d.addSpinBox  (input3+"  ", 1, 120, &Value2, 1);                   // A number spin box for age.
+    d.addComboBox ("Value: ", "Value1|Value2|Value3", &Value3);   // A combo box with three options (separated by '|').
 
     d.exec();                             // Execution stops here until user closes dialog
 
