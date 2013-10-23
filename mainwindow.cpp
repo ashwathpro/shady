@@ -473,13 +473,22 @@ void MainWindow::createCustomDialog(QString title, QString input1,QString input2
     bool    Value1  = true;              //  probably exist in your program already and so it is only
     int     Value2      = 20;
     int     Value3 = 1;
-
+    int     ScaleValue = 10;
     CustomDialog d(title, this);                            // Title for custom dialog
     d.addLabel    ("Please enter the details below ...");           // The first element is just a text label (non interactive).
     d.addLineEdit (input1+"  ", &Value0, "Tooltip value");             // line edit.
     d.addCheckBox (input2+"  ", &Value1, "my tooltip");       // A checkbox with a tooltip (optional last argument).
     d.addSpinBox  (input3+"  ", 1, 120, &Value2, 1);                   // A number spin box for age.
     d.addComboBox ("Value: ", "Value1|Value2|Value3", &Value3);   // A combo box with three options (separated by '|').
+
+    scaleSetting = new QSlider(Qt::Horizontal, this);
+//            output = new Output();
+
+    scaleSetting->setRange(1, 20);
+    scaleSetting->setValue(5);
+    connect(scaleSetting, SIGNAL(valueChanged(int)), this, SLOT(SetScale(int)));
+
+    d.addSlider(scaleSetting,tr("Scale Setting"),&ScaleValue,tr("Scale"));
 
     d.exec();                             // Execution stops here until user closes dialog
 

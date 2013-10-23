@@ -129,13 +129,15 @@ using namespace std;
 #include <QDir>
 #include <QUrl>
 
+
+//#include "mainwindow.h"
 //############################################################
 
 //## CONSTANTS:
 
 enum DlgType { DLG_LABEL, DLG_CHECKBOX, DLG_LINEEDIT, DLG_FLOATEDIT,
   DLG_SPINBOX, DLG_DBLSPINBOX, DLG_MINMAXSPIN,
-  DLG_COMBOBOX, DLG_RADIOGRP, DLG_GRPBOX, DLG_COLOR, DLG_TEXTEDIT, DGL_ALL };
+  DLG_COMBOBOX, DLG_RADIOGRP, DLG_GRPBOX, DLG_COLOR, DLG_TEXTEDIT, DGL_ALL, DLG_SLIDER };
 
 enum chkbehav { CB_NONE, CB_DISABLE, CB_ENABLE, CB_HIDE, CB_SHOW };
 
@@ -185,6 +187,7 @@ struct DialogElement
   bool    *returnChkExtra;      // Fsed if extraChkAdded is true.
 
   bool readOnly;                // if set to true, user cannot change the text.
+  int     *returnIntSlider;     // For DLG_SLIDER.
 
   //** FORM ELEMENTS TO DISPLAY (DEPENDING ON TYPE):
 
@@ -205,6 +208,7 @@ struct DialogElement
   QTextEdit      *textEdit;
 
   QCheckBox      *chkExtra;
+  QSlider* scaleSetting;
 };
 
 //############################################################
@@ -246,6 +250,10 @@ public:     //## METHODS:
   int addPercentBar(QString caption, QString valueLabel, float percent, int width, QColor colorBar, QString tooltip="", QFrame::Shape shape = QFrame::StyledPanel, QFrame::Shadow shadow = QFrame::Sunken);
   int addVSpacer(int minHeight=0);
 
+  // adding a new slider
+  int addSlider(QSlider* scaleSetting, QString caption, int *sliderValue, QString tooltip);
+
+
   int beginGroupBox(QString caption, bool flat=false, QString tooltip="", bool checkable=false, bool *checked=0);
   void endGroupBox();
 
@@ -285,6 +293,7 @@ public slots:   //## SLOTS:
   void customBtnOpenUrl();
   void updateBtnClicked(QObject *btnClicked);
   void resizeMe();
+
   int exec();
 };
 

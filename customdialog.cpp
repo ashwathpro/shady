@@ -219,6 +219,32 @@ int CustomDialog::addHtmlLabel(QString caption, QString tooltip)
   return elements.size();
 }
 
+int CustomDialog::addSlider(QSlider* scaleSetting, QString caption, int *sliderValue, QString tooltip)
+{
+    DialogElement &e = addNewElement(DLG_SLIDER, caption, tooltip, false);
+    e.returnIntSlider = sliderValue;
+
+//    scaleSetting = new QSlider(Qt::Horizontal, this);
+////            output = new Output();
+
+//    scaleSetting->setRange(20, 70);
+//    scaleSetting->setValue(20);
+//    connect(scaleSetting, SIGNAL(valueChanged(int)), this, SLOT( SetScale(int)));
+
+
+    e.scaleSetting = scaleSetting;
+    e.layout->addWidget(e.scaleSetting);
+    layoutNextElement->addLayout(e.layout);
+    return elements.size();
+}
+
+//void CustomDialog::SetScale(int k ) {
+//    (this->parent())->scaleRatio = (1-k/100.0);
+//    if ((this->parent())->extendedMesh == NULL) return;
+//    (this->parent())->extendedMesh->RebuildMesh(scaleRatio);
+//    (MainWindow*)(this->parent())->mainwidget->updateGL();
+//    return;
+//}
 
 //------------------------
 //-- Adds a checkbox to the next row of the dialog

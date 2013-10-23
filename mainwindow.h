@@ -106,6 +106,7 @@ private:
     QScrollArea     *pixmapLabelArea;
 
     GLWidget        *glWidget;
+    QSlider* scaleSetting;
 
     //Menu Pointers
     QMenu           *fileMenu;
